@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Cart - Sportswear Store</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+
+<body>
+    <div class="wrapper">
+        <header>
+            <h1>SportZone</h1>
+            <p>Your shopping cart</p>
+        </header>
+
+        <nav>
+  <a href="index.html">Home</a>
+  <div class="dropdown">
+    <a href="products.html" class="dropbtn">Products</a>
+    <div class="dropdown-content">
+      <a href="product-detail.html">Shirts</a>
+      <a href="product-pants.html">Pants</a>
+      <a href="product-socks.html">Socks</a>
+      <a href="product-shoes.html">Shoes</a>
+     
+    </div>
+  </div>
+  <a href="cart.html">Cart</a>
+  <a href="contact.html">Contact</a>
+  <a href="about.html">About</a>
+  <a href="login.html">Login</a>
+</nav>
+        <main>
+            <section>
+                <h2 style="text-align: center; margin-top: 30px;">Your Cart</h2>
+                <div id="cart-container" style="padding: 20px;"></div>
+                <div style="text-align: center; font-size: 1.3rem; font-weight: bold;" id="total-price"></div>
+
+            </section>
+            <section>
+                <div style="text-align: center; margin-top: 30px;">
+                    <a href="checkout.html"
+                        style="display: inline-block; background-color: #28a745; color: white; padding: 10px 20px; text-decoration: none; border-radius: 5px; font-size: 1.2rem; transition: background-color 0.3s ease;">
+                        Check Out
+                    </a>
+                </div>
+
+            </section>
+
+
+            <script>
+                const cartItems = JSON.parse(localStorage.getItem('cart')) || [];
+                const container = document.getElementById('cart-items');
+
+                if (cartItems.length === 0) {
+                    container.innerHTML = '<p>Your cart is empty.</p>';
+                } else {
+                    cartItems.forEach(item => {
+                        const div = document.createElement('div');
+                        div.style.marginBottom = '20px';
+                        div.innerHTML = `
+        <img src="${item.image}" alt="${item.name}" width="100">
+        <p><strong>${item.name}</strong></p>
+        <p>Quantity: ${item.quantity}</p>
+        <p>Price: $${item.price}</p>
+        <hr>
+      `;
+                        container.appendChild(div);
+                    });
+                }
+            </script>
+            <script>
+                function renderCart() {
+                    const cart = JSON.parse(localStorage.getItem("cart")) || [];
+                    const container = document.getElementById("cart-container");
+                    const totalPriceElement = document.getElementById("total-price");
+
+                    if (cart.length === 0) {
+                        container.innerHTML = "<p style='text-align: center;'>🛒 Your cart is empty.</p>";
+                        totalPriceElement.textContent = "";
+                        return;
+                    }
+
+                    let html = "<table style='width: 100%; border-collapse: collapse;'>";
+
+                    html += `
+      <tr style="background-color: #f0f0f0;">
+        <th style="padding: 10px;">Image</th>
+        <th>Name</th>
+        <th>Size</th>
+        <th>SL</th>
+        <th>Price</th>
+        <th>Remove</th>
+      </tr>
+    `;
+
+                    let total = 0;
+
+                    cart.forEach((item, index) => {
+                        const itemTotal = item.price * item.quantity;
+                        total += itemTotal;
+
+                        html += `
+        <tr style="text-align: center;">
+          <td><img src="${item.image}" alt="${item.name}" style="height: 80px; border-radius: 8px;"></td>
+          <td>${item.name}</td>
+          <td>${item.size}</td>
+          <td>${item.quantity}</td>
+          <td>$${itemTotal}</td>
+          <td><button onclick="removeItem(${index})" style="padding: 5px 10px; background-color: red; color: white; border: none; border-radius: 4px; cursor: pointer;">X</button></td>
+        </tr>
+      `;
+                    });
+
+                    html += "</table>";
+                    container.innerHTML = html;
+
+                    totalPriceElement.innerHTML = `<p>Total: $${total}</p>`;
+                }
+
+                function removeItem(index) {
+                    let cart = JSON.parse(localStorage.getItem("cart")) || [];
+                    cart.splice(index, 1);
+                    localStorage.setItem("cart", JSON.stringify(cart));
+                    renderCart();
+                }
+
+                // Load cart on page load
+                window.onload = renderCart;
+            </script>
+
+
+
+
+        </main>
+
+
+        <footer style="background:#222; color:#fff; padding:30px 10px 10px 10px; text-align:center;">
+  <div style="max-width:1000px; margin:auto; display:flex; flex-wrap:wrap; justify-content:space-between; align-items:center;">
+    <div style="flex:1; min-width:200px; text-align:left;">
+      <h3>Liên hệ</h3>
+      <p>Địa chỉ: 123 Đường Thể Thao, Quận 1, TP.HCM</p>
+      <p>Điện thoại: <a href="tel:0123456789" style="color:#fff;">0123 456 789</a></p>
+      <p>Email: <a href="mailto:info@sportzone.vn" style="color:#fff;">info@sportzone.vn</a></p>
+    </div>
+    <div style="flex:1; min-width:200px;">
+      <h3 style="margin-bottom:20px">Kết nối với chúng tôi</h3>
+      <a href="https://facebook.com" target="_blank" style="margin:0 8px; color:#fff; font-size:24px; text-decoration:none;">
+        <a href="https://facebook.com" target="_blank" style="margin:0 8px; color:#fff; font-size:24px; text-decoration:none;">
+  <img src="images/facebook.png" alt="Facebook" style="width:24px; height:24px; vertical-align:middle; margin-right:6px;">Facebook
+</a>
+      </a>
+      <a href="https://instagram.com" target="_blank" style="margin:0 8px; color:#fff; font-size:24px; text-decoration:none;">
+        <a href="https://instagram.com" target="_blank" style="margin:0 8px; color:#fff; font-size:24px; text-decoration:none;">
+  <img src="images/Instagram.png" alt="Instagram" style="width:24px; height:24px; vertical-align:middle; margin-right:6px;"> Instagram
+</a>
+      </a>
+      <a href="https://zalo.me" target="_blank" style="margin:0 8px; color:#fff; font-size:24px; text-decoration:none;">
+        <a href="https://zalo.me" target="_blank" style="margin:0 8px; color:#fff; font-size:24px; text-decoration:none;">
+  <img src="images/Zalo.png" alt="Zalo" style="width:24px; height:24px; vertical-align:middle; margin-right:6px;"> Zalo
+</a>  
+      </a>
+    </div>
+  </div>
+  <p style="margin-top:20px;">&copy; 2025 SportZone. All rights reserved.</p>
+</footer>
+    </div>
+</body>
+
+</html>

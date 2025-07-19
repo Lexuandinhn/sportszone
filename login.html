@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Login - Sportswear Store</title>
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+  <!-- Wrapper bao toàn bộ nội dung -->
+  <div class="wrapper">
+
+    <header>
+      <h1>SportZone</h1>
+      <p>Welcome back! Please login to continue</p>
+    </header>
+
+    <nav>
+  <a href="index.html">Home</a>
+  <div class="dropdown">
+    <a href="products.html" class="dropbtn">Products</a>
+    <div class="dropdown-content">
+      <a href="product-detail.html">Shirts</a>
+      <a href="product-pants.html">Pants</a>
+      <a href="product-socks.html">Socks</a>
+      <a href="product-shoes.html">Shoes</a>
+     
+    </div>
+  </div>
+  <a href="cart.html">Cart</a>
+  <a href="contact.html">Contact</a>
+  <a href="about.html">About</a>
+  <a href="login.html">Login</a>
+</nav>
+
+    <main>
+      <section class="login-container">
+        <h2>Login</h2>
+        <form>
+          <input type="text" placeholder="Username" required>
+          <input type="password" placeholder="Password" required>
+          <button type="submit">Login</button>
+        <a href="register.html" class="register-link">Register</a>
+ 
+        </form>
+      </section>
+    </main>
+
+    <footer style="background:#222; color:#fff; padding:30px 10px 10px 10px; text-align:center;">
+  <div style="max-width:1000px; margin:auto; display:flex; flex-wrap:wrap; justify-content:space-between; align-items:center;">
+    <div style="flex:1; min-width:200px; text-align:left;">
+      <h3>Liên hệ</h3>
+      <p>Địa chỉ: 123 Đường Thể Thao, Quận 1, TP.HCM</p>
+      <p>Điện thoại: <a href="tel:0123456789" style="color:#fff;">0123 456 789</a></p>
+      <p>Email: <a href="mailto:info@sportzone.vn" style="color:#fff;">info@sportzone.vn</a></p>
+    </div>
+    <div style="flex:1; min-width:200px;">
+      <h3 style="margin-bottom:20px">Kết nối với chúng tôi</h3>
+      <a href="https://facebook.com" target="_blank" style="margin:0 8px; color:#fff; font-size:24px; text-decoration:none;">
+        <a href="https://facebook.com" target="_blank" style="margin:0 8px; color:#fff; font-size:24px; text-decoration:none;">
+  <img src="images/facebook.png" alt="Facebook" style="width:24px; height:24px; vertical-align:middle; margin-right:6px;">Facebook
+</a>
+      </a>
+      <a href="https://instagram.com" target="_blank" style="margin:0 8px; color:#fff; font-size:24px; text-decoration:none;">
+        <a href="https://instagram.com" target="_blank" style="margin:0 8px; color:#fff; font-size:24px; text-decoration:none;">
+  <img src="images/Instagram.png" alt="Instagram" style="width:24px; height:24px; vertical-align:middle; margin-right:6px;"> Instagram
+</a>
+      </a>
+      <a href="https://zalo.me" target="_blank" style="margin:0 8px; color:#fff; font-size:24px; text-decoration:none;">
+        <a href="https://zalo.me" target="_blank" style="margin:0 8px; color:#fff; font-size:24px; text-decoration:none;">
+  <img src="images/Zalo.png" alt="Zalo" style="width:24px; height:24px; vertical-align:middle; margin-right:6px;"> Zalo
+</a>  
+      </a>
+    </div>
+  </div>
+  <p style="margin-top:20px;">&copy; 2025 SportZone. All rights reserved.</p>
+</footer>
+
+  </div>
+  <script>
+// Xử lý đăng nhập
+document.querySelector('form').addEventListener('submit', function(e) {
+  e.preventDefault();
+  const username = this.querySelector('input[type="text"]').value.trim();
+  const password = this.querySelector('input[type="password"]').value;
+  // Lấy thông tin user đã đăng ký từ localStorage
+  const user = JSON.parse(localStorage.getItem('user_' + username));
+  if (user && user.password === password) {
+    alert('Đăng nhập thành công!');
+    // Có thể chuyển hướng sang trang chủ hoặc trang cá nhân
+    window.location.href = 'index.html';
+  } else {
+    alert('Sai tên đăng nhập hoặc mật khẩu!');
+  }
+});
+</script>
+</body>
+</html>
